@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.TarjetasCreditosPage"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Carros registrados"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <StackLayout Padding="2">
+        <ActivityIndicator  HorizontalOptions="Center" 
+                            
+                            Color="{StaticResource AccentColor2}" 
+                            IsRunning="{Binding IsRunning}" >
+        </ActivityIndicator>
+        <ListView 
+            ItemTemplate="{StaticResource TarjetasItemTemplate}"
+            ItemsSource="{Binding TarjetasCreditos}"
+            HasUnevenRows="True"
+            IsPullToRefreshEnabled="True"
+            RefreshCommand="{Binding RefreshTarjetasCommand}"
+            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
+        </ListView>
+    </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_Add.png" Command="{Binding NuevaTarjetaCommand}"/>
+    </ContentPage.ToolbarItems>
+
+</ContentPage>

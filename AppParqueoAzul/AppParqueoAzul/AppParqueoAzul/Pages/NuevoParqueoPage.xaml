@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.NuevoParqueoPage"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+              xmlns:control="clr-namespace:AppParqueoAzul.Controls"
+             Title="Nuevo Parqueo"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <StackLayout BindingContext="{Binding NuevoParqueo}">
+
+        <StackLayout Orientation="Horizontal">
+         <control:BindablePicker
+          Title="Seleccione una tarjeta"
+          DisplayMemberPath="Numero"
+          SelectedValuePath="TarjetaId"
+          ItemsSource="{Binding Tarjetas}"
+          SelectedValue ="{Binding Path=TarjetaId, Mode=TwoWay}"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="Center"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <control:BindablePicker
+          Title="Seleccione un vehículo"
+          DisplayMemberPath="Placa"
+          SelectedValuePath="CarroId"
+          ItemsSource="{Binding Carros}"
+          SelectedValue ="{Binding Path=CarroId, Mode=TwoWay}"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="Center"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" >
+            <Entry
+              IsEnabled="False"
+              Text="{Binding CantHoras}"
+              FontAttributes="Bold"
+              TextColor="{StaticResource FontColor}"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="Center"/>
+            <Stepper
+              Value="{Binding CantHoras}"
+              Increment="1"
+              Minimum="1"
+              Maximum="2"
+              HorizontalOptions="End"
+              VerticalOptions="Center"
+              ValueChanged="OnCantHorasChanged"/>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Padding="2">
+            <Label FontAttributes="Bold" Text="{Binding FechaHoraInicio,StringFormat='Hora de Inicio:{0}',Mode=TwoWay}" >
+            </Label>
+
+            <Label  FontAttributes="Bold" Text="{Binding FechaHoraFin,StringFormat='Hora Final:{0}',Mode=TwoWay}" >
+            </Label>
+        </StackLayout>
+
+    </StackLayout>
+</ContentPage>
