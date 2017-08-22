@@ -74,6 +74,7 @@ namespace AppParqueoAzul.ViewModels
             await dialogService.ShowMessage("Error", response.Message);
         }
 
+        
         #endregion
     }
 }

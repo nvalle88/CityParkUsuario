@@ -15,16 +15,16 @@ using System.Windows.Input;
 
 namespace AppParqueoAzul.ViewModels
 {
-   public class NuevoParqueoViewModel: Parqueo,INotifyPropertyChanged
+   public class NuevoParqueoViewModel: Parqueo//,INotifyPropertyChanged
     {
         Position Location;
-        public double cantidadHoras { get; set; }
+        public double cantidadMinutos { get; set; }
         
         private ApiService apiService;
         private NavigationService navigationService;
         private DialogService dialogService;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<CarrosViewModel> Carros { get; set; }
 
@@ -38,7 +38,7 @@ namespace AppParqueoAzul.ViewModels
                 {
                     isRunning = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
+                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
                 }
             }
             get { return isRunning; }
@@ -47,22 +47,22 @@ namespace AppParqueoAzul.ViewModels
 
 
 
-        public double CantidadHoras
+        public double CantidadMinutos
         {
             set
             {
-                if (cantidadHoras != value)
+                if (cantidadMinutos != value)
                 {
-                    cantidadHoras = value;
-
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CantidadHoras"));
+                    cantidadMinutos = value;
+                   // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CantidadHoras"));
                 }
             }
             get
             {
-                return cantidadHoras;
+                return cantidadMinutos;
             }
         }
+
 
 
         public NuevoParqueoViewModel()
@@ -81,9 +81,9 @@ namespace AppParqueoAzul.ViewModels
         }
 
 
-        public void UpdateCantidadHoras(object sender, int value)
+        public void UpdateCantidadMinutos(object sender, int value)
         {
-            CantidadHoras = value;
+            CantidadMinutos = value;
         }
 
         private async void Locator()
@@ -121,23 +121,25 @@ namespace AppParqueoAzul.ViewModels
             }
         }
 
-        public ICommand SalvarParqueoCommand { get { return new RelayCommand(SalvarParqueo); } }
 
-        private async void SalvarParqueo()
+       // public ICommand SalvarParqueoCommand { get { return new RelayCommand(SalvarParqueo); } }
+
+
+        public async void SalvarParqueo()
         {
 
-
+            
             IsRunning = true;
             var PP = ParquearPage.GetInstance();
-
+            
             var parqueo = new Parqueo
             {
 
                 FechaInicio = DateTime.Now,
-                FechaFin = DateTime.Now.AddHours(CantidadHoras),
-                Latitud=PP.Location.Latitude,
+                FechaFin = DateTime.Now.AddMinutes(CantidadMinutos),
+              Latitud=PP.Location.Latitude,
                 CarroId=CarroId,
-                Longitud=PP.Location.Longitude,
+               Longitud=PP.Location.Longitude,
                 UsuarioId=navigationService.GetUsuarioActual().UsuarioId,
                 
             };
@@ -155,16 +157,9 @@ namespace AppParqueoAzul.ViewModels
                 navigationService.SetMainPage(navigationService.GetUsuarioActual());
                 return;
             }
-
-
             await dialogService.ShowMessage("El parqueo no ha sido establesido satisfactoriamente", response.Message);
             IsRunning = false;
-            return;
-     
-
-           
-
-
+            return;     
         }
     }
 }

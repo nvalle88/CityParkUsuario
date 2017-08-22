@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using ButtonCircle.FormsPlugin.Abstractions;
 
 namespace AppParqueoAzul.Pages
 {
@@ -43,10 +44,11 @@ namespace AppParqueoAzul.Pages
             Locator();
         }
 
-        private void OnCantHorasChanged(object sender, ValueChangedEventArgs e)
-        {
-            parqueo.UpdateCantidadHoras(sender, (int)e.NewValue);
-        }
+        //private void OnCantHorasChanged(object sender, ValueChangedEventArgs e)
+        //{
+
+        //    parqueo.UpdateCantidadHoras(sender, (int)e.NewValue);
+        //}
 
 
         private async void Locator()
@@ -60,5 +62,54 @@ namespace AppParqueoAzul.Pages
             Location = location;
         }
 
+        private void CircleButton_Clicked(object sender, EventArgs e)
+        {
+            int minutos=0;
+            
+            CircleButton myobject = sender as CircleButton;
+            if (myobject.Text=="30m")
+            {
+                Button30m.BackgroundColor = Color.Blue;
+                Button1h.BackgroundColor = Color.White;
+                Button1h30m.BackgroundColor = Color.White;
+                Button2h.BackgroundColor = Color.White;
+                minutos = 30;
+            }
+            if (myobject.Text == "1h")
+            {
+                Button30m.BackgroundColor = Color.White;
+                Button1h.BackgroundColor = Color.Blue;
+                Button1h30m.BackgroundColor = Color.White;
+                Button2h.BackgroundColor = Color.White;
+                minutos = 30*2;
+            }
+            if (myobject.Text == "1h:30m")
+            {
+                Button30m.BackgroundColor = Color.White;
+                Button1h.BackgroundColor = Color.White;
+                Button1h30m.BackgroundColor = Color.Blue;
+                Button2h.BackgroundColor = Color.White;
+                minutos = 30 * 3;
+            }
+            if (myobject.Text == "2h")
+            {
+                Button30m.BackgroundColor = Color.White;
+                Button1h.BackgroundColor = Color.White;
+                Button1h30m.BackgroundColor = Color.White;
+                Button2h.BackgroundColor = Color.Blue;
+                minutos = 30 * 4;
+
+            }
+             parqueo.UpdateCantidadMinutos(sender, minutos);
+            
+
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
+            parqueo.SalvarParqueo();
+
+        }
     }
 }

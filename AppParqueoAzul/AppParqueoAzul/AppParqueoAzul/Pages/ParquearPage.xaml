@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppParqueoAzul.Pages.ParquearPage"
              xmlns:control="clr-namespace:AppParqueoAzul.Controls"
+             xmlns:circularButton="clr-namespace:ButtonCircle.FormsPlugin.Abstractions;assembly=ButtonCircle.FormsPlugin.Abstractions"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Nuevo parqueo"
@@ -24,30 +25,92 @@
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="Center"/>
 
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Número de horas:" TextColor="{StaticResource FontColor}"></Label>
-                <Entry
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <!--     <Entry
               IsEnabled="False"
               Text="{Binding CantidadHoras}"
               FontAttributes="Bold"
               TextColor="{StaticResource AccentColor2}"
               HorizontalOptions="FillAndExpand"
               VerticalOptions="Center"/>
-                <Stepper
+                  <Stepper
               Value="{Binding CantidadHoras}"
               Increment="1"
               Minimum="1"
               Maximum="3"
               HorizontalOptions="End"
               VerticalOptions="Center"
-              ValueChanged="OnCantHorasChanged"/>
+              ValueChanged="OnCantHorasChanged"/>-->
+
+                <circularButton:CircleButton 
+                    x:Name="Button30m"
+                    Text="30m"
+                    FontSize="10" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Clicked="CircleButton_Clicked"
+                   
+                  
+                    />
+                <circularButton:CircleButton 
+                    x:Name="Button1h"
+                    Text="1h"
+                    FontSize="10" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Clicked="CircleButton_Clicked"
+
+                    />
+                    <circularButton:CircleButton 
+                    x:Name="Button1h30m"
+                    Text="1h:30m"
+                    FontSize="10" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Clicked="CircleButton_Clicked"
+/>
+                <circularButton:CircleButton 
+                    x:Name="Button2h"
+                    Text="2h"
+                    FontSize="10" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Clicked="CircleButton_Clicked"
+
+                    />
+                
+
             </StackLayout>
+            <!--Command="{Binding SalvarParqueoCommand}"-->
+
             <Button 
-                Command="{Binding SalvarParqueoCommand}"
+                Clicked="Button_Clicked"
                 Text="Guardar"
                 BackgroundColor="{StaticResource AccentColor2}"
                 TextColor="{StaticResource FontColor}">
             </Button>
+            
             <ActivityIndicator  AnchorX="10" AnchorY="10"  HorizontalOptions="Center" 
                             Color="{StaticResource AccentColor2}" 
                             IsRunning="{Binding IsRunning}" >

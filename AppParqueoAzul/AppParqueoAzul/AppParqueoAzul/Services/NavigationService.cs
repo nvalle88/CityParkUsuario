@@ -21,6 +21,8 @@ namespace AppParqueoAzul.Services
             
             switch (pageName)
             {
+               
+
                 case "CarrosPage":
                     await App.Navigator.PushAsync(new CarrosPage());
                     break;
@@ -28,7 +30,7 @@ namespace AppParqueoAzul.Services
                 case "ParquearPage":
                     var main = MainViewModel.GetInstance();
                     main.NuevoParqueo = new NuevoParqueoViewModel();
-                    main.NuevoParqueo.CantidadHoras = 1;
+                  //  main.NuevoParqueo.CantidadMinutos =;
                     await App.Navigator.PushAsync(new ParquearPage());
                    
                     
@@ -74,6 +76,7 @@ namespace AppParqueoAzul.Services
                 case "MainPage":
                     await App.Navigator.PopToRootAsync();
                     break;
+
 
                 default: break;
             }

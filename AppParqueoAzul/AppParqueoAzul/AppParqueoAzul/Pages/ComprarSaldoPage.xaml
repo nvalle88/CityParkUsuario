@@ -12,10 +12,22 @@
             Color="{StaticResource AccentColor2}"
             HeightRequest="2">
             </BoxView>
-            <Entry Placeholder="Ingrese el código de tarjeta prepago"
-                   Text="{Binding Codigo,Mode=TwoWay}"
+            
+            <Entry 
+                Placeholder="Ingrese el código de tarjeta prepago"
+                x:Name="codeEntry"  
+                Text="{Binding Codigo,Mode=TwoWay}"
                    TextColor="{StaticResource FontColor}"
                    ></Entry>
+            
+            <Button
+                Text="Escanear Código"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource FontColor}"
+                Clicked="Button_Clicked">
+                
+            </Button>
+            
             <Button 
                 Command="{Binding BuscarSaldoCommand}"
                 Text="Ingresar"

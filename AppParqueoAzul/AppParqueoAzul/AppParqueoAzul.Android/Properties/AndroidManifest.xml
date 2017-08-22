@@ -8,9 +8,11 @@
   <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-	<application android:label="AppParqueoAzul.Android">
+
+  <application android:label="AppParqueoAzul.Android">
     <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDJSgHjIGuRD7kTxiaZKl7V5ugWMFJpu5s" />
 
   </application>
