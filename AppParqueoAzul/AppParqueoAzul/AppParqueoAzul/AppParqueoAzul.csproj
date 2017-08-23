@@ -38,9 +38,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\PlacaValidationBehavior.cs" />
     <Compile Include="Classes\BuscarTarjetaPrepago.cs" />
     <Compile Include="Classes\ConsultarSaldo.cs" />
     <Compile Include="Classes\LoginRequest.cs" />
+    <Compile Include="Classes\MarcaRequest.cs" />
     <Compile Include="Classes\Response.cs" />
     <Compile Include="Classes\UsuarioRequest.cs" />
     <Compile Include="Controls\BindablePicker.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="ViewModels\CarrosViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MarcaViewModel.cs" />
     <Compile Include="ViewModels\ModeloViewModel.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\NuevaTarjetaCreditoViewModel.cs" />

@@ -3,12 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppParqueoAzul.Pages.NuevoCarroPage"
              xmlns:control="clr-namespace:AppParqueoAzul.Controls"
+             xmlns:local="clr-namespace:AppParqueoAzul.Behaviors;assembly=AppParqueoAzul"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Nuevo vehículo"
              BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Content>
         <ScrollView >
             <StackLayout BindingContext="{Binding NuevoCarro}" Padding="2" Spacing="5">
+
+                <control:BindablePicker
+                  Title="Seleccione la Marca"
+                   DisplayMemberPath="Nombre"
+                  SelectedValuePath="Id"
+                  ItemsSource="{Binding Marcas}"
+                  SelectedValue ="{Binding Path=Id, Mode=TwoWay}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Center"
+                    />
                 
                 <control:BindablePicker
                   Title="Seleccione el Modelo"
@@ -17,10 +28,16 @@
                   ItemsSource="{Binding Modelos}"
                   SelectedValue ="{Binding Path=ModeloId, Mode=TwoWay}"
                   HorizontalOptions="FillAndExpand"
-                  VerticalOptions="Center"/>
+                  VerticalOptions="Center"
+                  />
+                
                 <Entry Placeholder="Placa"
                    Text="{Binding Placa,Mode=TwoWay}"
-                   TextColor="{StaticResource FontColor}"></Entry>
+                   TextColor="{StaticResource FontColor}">
+                    <Entry.Behaviors>
+                        <local:PlacaValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
             <Entry Placeholder="Color"
                    Text="{Binding Color,Mode=TwoWay}"
                    TextColor="{StaticResource FontColor}"></Entry>

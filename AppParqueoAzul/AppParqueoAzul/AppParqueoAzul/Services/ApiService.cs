@@ -264,6 +264,41 @@ namespace AppParqueoAzul.Services
             }
         }
 
+        //http://cityparkws.azurewebsites.net/api/modeloes/GetModeloByMarca
+        public async Task<List<Modelo>> GetModelosByMarca(int marcaId)
+        {
+            try
+            {
+                var modeloRequest = new Modelo
+                {
+                    MarcaId = marcaId,
+
+                };
+
+                var request = JsonConvert.SerializeObject(modeloRequest);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
+                var url = "/api/modeloes/GetModeloByMarca";
+                var response = await client.PostAsync(url, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                var modelos = JsonConvert.DeserializeObject<List<Modelo>>(result);
+
+                return modelos;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
         public async Task<List<TarjetaCredito>> GetTarjetaCredito(string usuarioId)
         {
             try
@@ -424,6 +459,24 @@ namespace AppParqueoAzul.Services
             }
         }
 
+        public async Task<List<MarcaRequest>> GetMarcas()
+        {
+            try
+            {
+                var client = new System.Net.Http.HttpClient();
+                var response = await client.GetAsync("http://cityparkws.azurewebsites.net/api/marcas");
+                string MarcasJson = await response.Content.ReadAsStringAsync();
+                var marcas = JsonConvert.DeserializeObject<List<MarcaRequest>>(MarcasJson);
+                return marcas;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
         //public static byte[] ReadFully(Stream input)
         //{
         //    byte[] buffer = new byte[16 * 1024];
@@ -484,5 +537,5 @@ namespace AppParqueoAzul.Services
 
         //}
 
-  }
+    }
 }

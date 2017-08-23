@@ -37,16 +37,19 @@ namespace AppParqueoAzul.ViewModels
         }
 
         public ObservableCollection<ModeloViewModel> Modelos { get; set; }
+        public ObservableCollection<MarcaViewModel> Marcas { get; set; }
 
 
         public NuevoCarroViewModel()
         {
             IsRunning = true;
                 Modelos = new ObservableCollection<ModeloViewModel>();
+                Marcas = new ObservableCollection<MarcaViewModel>();
                 apiService = new ApiService();
                 navigationService = new NavigationService();
                 dialogService = new DialogService();
-                LoadModelos();
+              //  LoadModelos();
+            LoadMarcas();
         }
 
         private async void LoadModelos()
@@ -62,8 +65,28 @@ namespace AppParqueoAzul.ViewModels
                    Carro=modelo.Carro,
                    Marca=modelo.Marca,
                    ModeloId=modelo.ModeloId,
+                   MarcaId = modelo.MarcaId,                    
+                   Nombre = modelo.Nombre,
+                });
+
+            }
+            IsRunning = false;
+        }
+
+        private async void LoadModelosByMarcas(int marcaid)
+        {
+            var listaModelos = await apiService.GetModelosByMarca(marcaid);
+
+            Modelos.Clear();
+
+            foreach (var modelo in listaModelos)
+            {
+                Modelos.Add(new ModeloViewModel
+                {
+                    Carro = modelo.Carro,
+                    Marca = modelo.Marca,
+                    ModeloId = modelo.ModeloId,
                     MarcaId = modelo.MarcaId,
-                    
                     Nombre = modelo.Nombre,
                 });
 
@@ -71,7 +94,27 @@ namespace AppParqueoAzul.ViewModels
             IsRunning = false;
         }
 
+
+        private async void LoadMarcas()
+        {
+            var listaMarcas = await apiService.GetMarcas();
+            Marcas.Clear();
+            foreach (var marca in listaMarcas)
+            { if (marca.Nombre!=null)
+                Marcas.Add(new MarcaViewModel
+                {
+                    Id =marca.Id,
+                    Nombre=marca.Nombre,                               
+                });
+
+            }
+            IsRunning = false;
+
+        }
+
         public ICommand SalvarCarroCommand { get { return new RelayCommand(SalvarCarro); } }
+
+        
 
         private async void SalvarCarro()
         {

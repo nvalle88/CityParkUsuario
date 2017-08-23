@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppParqueoAzul.Models
+namespace AppParqueoAzul.Classes
 {
-  public  class Marca
+    public class MarcaRequest
     {
-
-
         public int Id { get; set; }
         public string Nombre { get; set; }
-
-       
-        public virtual List<Modelo> Modelo { get; set; }
     }
 }
