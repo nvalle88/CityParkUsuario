@@ -264,30 +264,25 @@ namespace AppParqueoAzul.Services
             }
         }
 
-        //http://cityparkws.azurewebsites.net/api/modeloes/GetModeloByMarca
-        public async Task<List<Modelo>> GetModelosByMarca(int marcaId)
+        public async Task<List<ModeloRequest>> GetModeloByMarca(MarcaRequest marca)
         {
             try
             {
-                var modeloRequest = new Modelo
-                {
-                    MarcaId = marcaId,
 
-                };
-
-                var request = JsonConvert.SerializeObject(modeloRequest);
+                var request = JsonConvert.SerializeObject(marca);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
                 client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
-                var url = "/api/modeloes/GetModeloByMarca";
+                var url = "/api/Modelos/GetModelosByMarca";
                 var response = await client.PostAsync(url, content);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     return null;
                 }
+
                 var result = await response.Content.ReadAsStringAsync();
-                var modelos = JsonConvert.DeserializeObject<List<Modelo>>(result);
+                var modelos = JsonConvert.DeserializeObject<List<ModeloRequest>>(result);
 
                 return modelos;
 

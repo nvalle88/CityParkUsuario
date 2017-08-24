@@ -43,6 +43,7 @@
     <Compile Include="Classes\ConsultarSaldo.cs" />
     <Compile Include="Classes\LoginRequest.cs" />
     <Compile Include="Classes\MarcaRequest.cs" />
+    <Compile Include="Classes\ModeloRequest.cs" />
     <Compile Include="Classes\Response.cs" />
     <Compile Include="Classes\UsuarioRequest.cs" />
     <Compile Include="Controls\BindablePicker.cs" />

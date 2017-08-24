@@ -1,4 +1,5 @@
-﻿using AppParqueoAzul.Models;
+﻿using AppParqueoAzul.Classes;
+using AppParqueoAzul.Models;
 using AppParqueoAzul.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -48,13 +50,14 @@ namespace AppParqueoAzul.ViewModels
                 apiService = new ApiService();
                 navigationService = new NavigationService();
                 dialogService = new DialogService();
-              //  LoadModelos();
+               // LoadModelos();
             LoadMarcas();
         }
 
-        private async void LoadModelos()
+        private async void LoadModelos(MarcaRequest _marca)
         {
-            var listaModelos = await apiService.GetModelos();
+            
+            var listaModelos = await apiService.GetModeloByMarca(_marca);
 
             Modelos.Clear();
 
@@ -62,39 +65,15 @@ namespace AppParqueoAzul.ViewModels
             {
                 Modelos.Add(new ModeloViewModel
                 {
-                   Carro=modelo.Carro,
-                   Marca=modelo.Marca,
-                   ModeloId=modelo.ModeloId,
-                   MarcaId = modelo.MarcaId,                    
+                   Id=modelo.Id,
                    Nombre = modelo.Nombre,
+                  
                 });
 
             }
             IsRunning = false;
         }
-
-        private async void LoadModelosByMarcas(int marcaid)
-        {
-            var listaModelos = await apiService.GetModelosByMarca(marcaid);
-
-            Modelos.Clear();
-
-            foreach (var modelo in listaModelos)
-            {
-                Modelos.Add(new ModeloViewModel
-                {
-                    Carro = modelo.Carro,
-                    Marca = modelo.Marca,
-                    ModeloId = modelo.ModeloId,
-                    MarcaId = modelo.MarcaId,
-                    Nombre = modelo.Nombre,
-                });
-
-            }
-            IsRunning = false;
-        }
-
-
+        
         private async void LoadMarcas()
         {
             var listaMarcas = await apiService.GetMarcas();
@@ -108,13 +87,28 @@ namespace AppParqueoAzul.ViewModels
                 });
 
             }
+          //  var listaModelos = await apiService.GetModeloByMarca(Marcas[0]);
             IsRunning = false;
 
         }
-
-        public ICommand SalvarCarroCommand { get { return new RelayCommand(SalvarCarro); } }
-
         
+
+        int marcaseleccionada;
+        public int MarcaSelectedIndex
+        {
+            get
+            {
+                return marcaseleccionada;
+            }
+            set
+            {
+                marcaseleccionada = value;
+                LoadModelos(Marcas[marcaseleccionada]);
+                
+            }
+        }
+
+        public ICommand SalvarCarroCommand { get { return new RelayCommand(SalvarCarro); } }       
 
         private async void SalvarCarro()
         {

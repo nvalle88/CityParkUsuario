@@ -1,8 +1,9 @@
-﻿using AppParqueoAzul.Models;
+﻿using AppParqueoAzul.Classes;
+using AppParqueoAzul.Models;
 
 namespace AppParqueoAzul.ViewModels
 {
-    public class ModeloViewModel:Modelo
+    public class ModeloViewModel:ModeloRequest
     {
     }
 }

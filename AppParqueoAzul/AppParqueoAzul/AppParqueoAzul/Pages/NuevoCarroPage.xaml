@@ -17,6 +17,7 @@
                   SelectedValuePath="Id"
                   ItemsSource="{Binding Marcas}"
                   SelectedValue ="{Binding Path=Id, Mode=TwoWay}"
+                  SelectedIndex="{Binding MarcaSelectedIndex, Mode=TwoWay}"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="Center"
                     />
@@ -24,9 +25,9 @@
                 <control:BindablePicker
                   Title="Seleccione el Modelo"
                   DisplayMemberPath="Nombre"
-                  SelectedValuePath="ModeloId"
+                  SelectedValuePath="Id"
                   ItemsSource="{Binding Modelos}"
-                  SelectedValue ="{Binding Path=ModeloId, Mode=TwoWay}"
+                  SelectedValue ="{Binding Path=Id, Mode=TwoWay}"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="Center"
                   />
