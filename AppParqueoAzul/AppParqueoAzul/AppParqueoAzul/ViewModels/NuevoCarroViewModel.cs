@@ -87,7 +87,6 @@ namespace AppParqueoAzul.ViewModels
                 });
 
             }
-          //  var listaModelos = await apiService.GetModeloByMarca(Marcas[0]);
             IsRunning = false;
 
         }

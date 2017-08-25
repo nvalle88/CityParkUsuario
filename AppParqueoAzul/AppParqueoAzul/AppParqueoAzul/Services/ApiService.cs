@@ -26,7 +26,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(loginRequest);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/Usuarios/Login";
                 var response = await client.PostAsync(url, content);
 
@@ -75,7 +75,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(consultaSaldo);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/Saldoes/ConsultarSaldo";
                 var response = await  client.PostAsync(url,content);
 
@@ -126,7 +126,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(buscarSaldoRequest);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/TarjetaPrepagoes/BuscarSaldo";
                 var response = await client.PostAsync(url, content);
 
@@ -168,7 +168,7 @@ namespace AppParqueoAzul.Services
             try
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = string.Format("/api/{0}", controller);
                 var response = await client.GetAsync(url);
 
@@ -200,7 +200,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(carro);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/Carroes";
                 var response = await client.PostAsync(url, content);
 
@@ -243,7 +243,7 @@ namespace AppParqueoAzul.Services
             try
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/Modeloes";
                 var response = await client.GetAsync(url);
 
@@ -307,7 +307,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(usuarioRequest);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/TarjetasCreditoes/GetTarjetasCreditos";
                 var response = await client.PostAsync(url, content);
 
@@ -337,7 +337,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(tarjetaCredito);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/TarjetaCreditoes";
                 var response = await client.PostAsync(url, content);
 
@@ -383,7 +383,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(Parqueo);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/Parqueos/InsertarParqueo";
                 var response = await client.PostAsync(url, content);
 
@@ -433,7 +433,7 @@ namespace AppParqueoAzul.Services
                 var request = JsonConvert.SerializeObject(usuarioRequest);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://QuitoParkApp.somee.com");
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
                 var url = "/api/Carroes/GetCarros";
                 var response = await client.PostAsync(url, content);
 
