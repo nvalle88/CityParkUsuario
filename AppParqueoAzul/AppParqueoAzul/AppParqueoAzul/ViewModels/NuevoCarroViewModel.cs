@@ -65,7 +65,7 @@ namespace AppParqueoAzul.ViewModels
             {
                 Modelos.Add(new ModeloViewModel
                 {
-                   Id=modelo.Id,
+                   ModeloId=modelo.ModeloId,
                    Nombre = modelo.Nombre,
                   
                 });
@@ -82,7 +82,7 @@ namespace AppParqueoAzul.ViewModels
             { if (marca.Nombre!=null)
                 Marcas.Add(new MarcaViewModel
                 {
-                    Id =marca.Id,
+                    MarcaId =marca.MarcaId,
                     Nombre=marca.Nombre,                               
                 });
 
@@ -92,8 +92,8 @@ namespace AppParqueoAzul.ViewModels
         }
         
 
-        int marcaseleccionada;
-        public int MarcaSelectedIndex
+        MarcaRequest marcaseleccionada;
+        public MarcaRequest MarcaSelectedItem
         {
             get
             {
@@ -101,9 +101,9 @@ namespace AppParqueoAzul.ViewModels
             }
             set
             {
+               // marcaseleccionada = ;
+                LoadModelos(value);
                 marcaseleccionada = value;
-                LoadModelos(Marcas[marcaseleccionada]);
-                
             }
         }
 
@@ -114,8 +114,7 @@ namespace AppParqueoAzul.ViewModels
             IsRunning = true;
             var main = MainViewModel.GetInstance();
             var carro = new Carro
-            {
-                ModeloId = ModeloId,
+            {   ModeloId = ModeloId,
                 Placa = Placa,
                 UsuarioId = navigationService.GetUsuarioActual().UsuarioId,
                 Color = Color,

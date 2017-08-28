@@ -16,6 +16,7 @@ namespace AppParqueoAzul.Models
         public double? Longitud { get; set; }
         public int? TarjetaCreditoId { get; set; }
         public int? CarroId { get; set; }
+        public int? PlazaId { get; set; }
 
         public virtual Carro Carro { get; set; }
         public virtual TarjetaCredito TarjetaCredito { get; set; }

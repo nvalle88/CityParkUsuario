@@ -16,6 +16,14 @@
             x:Name="MyMap"
             IsShowingUser="true">
             </maps:Map>
+            <Entry Placeholder="Plaza"
+                   Text="{Binding PlazaName}"
+                   TextColor="{StaticResource FontColor}"
+                   >
+                
+
+            </Entry>
+
             <control:BindablePicker
                   Title="Seleccione el vehículo"
                   DisplayMemberPath="FullName"
@@ -46,7 +54,7 @@
                 <circularButton:CircleButton 
                     x:Name="Button30m"
                     Text="30m"
-                    FontSize="10" 
+                    FontSize="15" 
                     TextColor="Black" 
                     HeightRequest="70" 
                     BorderRadius="70" 
@@ -54,14 +62,16 @@
                     BorderColor="Black" 
                     BorderThickness="5" 
                     BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="1"
                     Clicked="CircleButton_Clicked"
-                   
+
                   
                     />
                 <circularButton:CircleButton 
                     x:Name="Button1h"
                     Text="1h"
-                    FontSize="10" 
+                    FontSize="15" 
                     TextColor="Black" 
                     HeightRequest="70" 
                     BorderRadius="70" 
@@ -69,13 +79,15 @@
                     BorderColor="Black" 
                     BorderThickness="5" 
                     BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="2"
                     Clicked="CircleButton_Clicked"
 
                     />
                     <circularButton:CircleButton 
                     x:Name="Button1h30m"
                     Text="1h:30m"
-                    FontSize="10" 
+                    FontSize="15" 
                     TextColor="Black" 
                     HeightRequest="70" 
                     BorderRadius="70" 
@@ -83,12 +95,15 @@
                     BorderColor="Black" 
                     BorderThickness="5" 
                     BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="3"
                     Clicked="CircleButton_Clicked"
+
 />
                 <circularButton:CircleButton 
                     x:Name="Button2h"
                     Text="2h"
-                    FontSize="10" 
+                    FontSize="15" 
                     TextColor="Black" 
                     HeightRequest="70" 
                     BorderRadius="70" 
@@ -96,16 +111,19 @@
                     BorderColor="Black" 
                     BorderThickness="5" 
                     BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="4"
                     Clicked="CircleButton_Clicked"
 
                     />
                 
 
             </StackLayout>
-            <!--Command="{Binding SalvarParqueoCommand}"-->
+           
 
+           
             <Button 
-                Clicked="Button_Clicked"
+                Command="{Binding SalvarParqueoCommand}"
                 Text="Guardar"
                 BackgroundColor="{StaticResource AccentColor2}"
                 TextColor="{StaticResource FontColor}">

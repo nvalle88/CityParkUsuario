@@ -8,25 +8,31 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AppParqueoAzul.ViewModels
 {
    public class NuevoParqueoViewModel: Parqueo//,INotifyPropertyChanged
     {
         Position Location;
-        public double cantidadMinutos { get; set; }
-        
+        int cantidadMinutos;
+        public string PlazaName { get; set; }
+
+
         private ApiService apiService;
+        Plaza plaza;
         private NavigationService navigationService;
         private DialogService dialogService;
 
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<CarrosViewModel> Carros { get; set; }
+        private Command<object> unfocusedCommand;
 
         public bool isRunning;
 
@@ -38,7 +44,7 @@ namespace AppParqueoAzul.ViewModels
                 {
                     isRunning = value;
 
-                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
                 }
             }
             get { return isRunning; }
@@ -47,21 +53,6 @@ namespace AppParqueoAzul.ViewModels
 
 
 
-        public double CantidadMinutos
-        {
-            set
-            {
-                if (cantidadMinutos != value)
-                {
-                    cantidadMinutos = value;
-                   // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CantidadHoras"));
-                }
-            }
-            get
-            {
-                return cantidadMinutos;
-            }
-        }
 
 
 
@@ -78,13 +69,14 @@ namespace AppParqueoAzul.ViewModels
 
             LoadCarros();
             IsRunning = false;
+
         }
 
 
-        public void UpdateCantidadMinutos(object sender, int value)
-        {
-            CantidadMinutos = value;
-        }
+        //public void UpdateCantidadMinutos(object sender, int value)
+        //{
+        //    CantidadMinutos = value;
+        //}
 
         private async void Locator()
         {
@@ -122,26 +114,55 @@ namespace AppParqueoAzul.ViewModels
         }
 
 
-       // public ICommand SalvarParqueoCommand { get { return new RelayCommand(SalvarParqueo); } }
+       public ICommand SalvarParqueoCommand { get { return new RelayCommand(SalvarParqueo); } }
+        private ICommand _updateminutosCommand;
 
+        public ICommand UpdateminutosCommand
+        {
+            get
+            {
+                if (_updateminutosCommand == null)
+                    _updateminutosCommand = new RelayCommand<string>(i => ActualizarMinutos(i));
+                return _updateminutosCommand;
+            }
+
+        }
+
+        public  void ActualizarMinutos(string i)
+        {
+
+            cantidadMinutos = 30* Int32.Parse(i);
+            ;
+            return;
+        }
 
         public async void SalvarParqueo()
         {
 
             
             IsRunning = true;
-            var PP = ParquearPage.GetInstance();
+            Debug.WriteLine(PlazaName);
+            Plaza plaza = new Plaza
+            {
+                Nombre = PlazaName,
+            };
+
+            var Pza = await apiService.GetPlazaByNombre(plaza);
             
+            var PP = ParquearPage.GetInstance();
+
+
+
             var parqueo = new Parqueo
             {
 
                 FechaInicio = DateTime.Now,
-                FechaFin = DateTime.Now.AddMinutes(CantidadMinutos),
-              Latitud=PP.Location.Latitude,
-                CarroId=CarroId,
-               Longitud=PP.Location.Longitude,
-                UsuarioId=navigationService.GetUsuarioActual().UsuarioId,
-                
+                FechaFin = DateTime.Now.AddMinutes(cantidadMinutos),
+                Latitud = PP.Location.Latitude,
+                CarroId = CarroId,
+                Longitud = PP.Location.Longitude,
+                UsuarioId = navigationService.GetUsuarioActual().UsuarioId,
+                PlazaId = Pza.PlazaId,
             };
             var response =await apiService.NuevaParqueo(parqueo);
             
@@ -161,5 +182,23 @@ namespace AppParqueoAzul.ViewModels
             IsRunning = false;
             return;     
         }
+
+
+        public void EntryCompleted()
+        {
+           
+        }
+
+        /// <summary>
+
+        /// Gets the UnfocusedCommand.
+
+        /// </summary>
+
+
+
+
+
+
     }
 }

@@ -8,7 +8,7 @@ namespace AppParqueoAzul.Classes
 {
     public class ModeloRequest
     {
-        public int Id { get; set; }
+        public int ModeloId { get; set; }
         public string Nombre { get; set; }
     }
 }

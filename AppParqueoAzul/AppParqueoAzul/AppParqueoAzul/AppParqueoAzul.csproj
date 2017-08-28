@@ -58,6 +58,7 @@
     <Compile Include="Models\Modelo.cs" />
     <Compile Include="Models\Multa.cs" />
     <Compile Include="Models\Parqueo.cs" />
+    <Compile Include="Models\Plaza.cs" />
     <Compile Include="Models\Saldo.cs" />
     <Compile Include="Models\TarjetaCredito.cs" />
     <Compile Include="Models\TarjetaPrepago.cs" />
