@@ -75,7 +75,7 @@ namespace AppParqueoAzul.ViewModels
         public BuscarTarjetaPrepagoViewModel BuscarSaldo { get; set; }
         public NuevaTarjetaCreditoViewModel NuevaTarjetaCredito { get; set; }
         public NuevoParqueoViewModel NuevoParqueo { get; set; }
-
+        public PlazaViewModel PlazaVM { get; set; }
 
 
         public bool IsRefreshing
@@ -126,6 +126,8 @@ namespace AppParqueoAzul.ViewModels
             Pins = new ObservableCollection<Pin>();
             apiService = new ApiService();
             BuscarSaldo = new BuscarTarjetaPrepagoViewModel();
+            PlazaVM = new PlazaViewModel();
+
             //NuevoCarro = new NuevoCarroViewModel(0);
             //// var lista= apiService.Get<TarjetaViewModel>("TarjetaCreditoes");
             //NuevaTarjetaCredito = new NuevaTarjetaCreditoViewModel();
@@ -201,8 +203,6 @@ namespace AppParqueoAzul.ViewModels
             };
             Pins.Add(pin3);
         }
-
-
 
         private async void LoadCarros()
         {
@@ -333,6 +333,13 @@ namespace AppParqueoAzul.ViewModels
         private async void NuevoCarroP()
         {
             await navigationService.Navigate("NuevoCarroPage");
+        }
+
+        public ICommand VerificaPlazasCommand { get { return new RelayCommand(VerificarPlazas); } }
+
+        private async void VerificarPlazas()
+        {
+            await navigationService.Navigate("PlazaPage");
         }
         #endregion
 

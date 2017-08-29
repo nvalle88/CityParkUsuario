@@ -15,6 +15,7 @@
             HeightRequest="100"
             x:Name="MyMap"
             IsShowingUser="true">
+                
             </maps:Map>
             <Entry Placeholder="Plaza"
                    Text="{Binding PlazaName}"

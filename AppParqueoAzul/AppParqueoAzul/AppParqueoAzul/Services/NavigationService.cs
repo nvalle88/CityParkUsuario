@@ -54,6 +54,11 @@ namespace AppParqueoAzul.Services
                     await App.Navigator.PushAsync(new NuevaTarjetaCreditoPage());
                     break;
 
+                case "PlazaPage":
+                    await App.Navigator.PushAsync(new PlazaPage());
+                    break;
+
+
                 //case "NuevoParqueoPage":
                 //    await App.Navigator.PushAsync(new NuevoParqueoPage());
                 //    break;

@@ -25,14 +25,12 @@ namespace AppParqueoAzul.ViewModels
 
 
         private ApiService apiService;
-        Plaza plaza;
         private NavigationService navigationService;
         private DialogService dialogService;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<CarrosViewModel> Carros { get; set; }
-        private Command<object> unfocusedCommand;
 
         public bool isRunning;
 
@@ -49,13 +47,7 @@ namespace AppParqueoAzul.ViewModels
             }
             get { return isRunning; }
         }
-
-
-
-
-
-
-
+      
         public NuevoParqueoViewModel()
         {
             IsRunning = true;
@@ -83,6 +75,7 @@ namespace AppParqueoAzul.ViewModels
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
              Location = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
+            
            
            
         }
@@ -164,6 +157,8 @@ namespace AppParqueoAzul.ViewModels
                 UsuarioId = navigationService.GetUsuarioActual().UsuarioId,
                 PlazaId = Pza.PlazaId,
             };
+            Pza.Ocupado = true;
+
             var response =await apiService.NuevaParqueo(parqueo);
             
             if (response.IsSuccess)
@@ -174,6 +169,8 @@ namespace AppParqueoAzul.ViewModels
                                                                                 , newParqueo.Carro.Modelo.Marca.Nombre, newParqueo.Carro.Placa, 
                                                                                 newParqueo.FechaInicio.ToString(), newParqueo.FechaFin.ToString(), 
                                                                                 newParqueo.Latitud, newParqueo.Longitud, navigationService.GetUsuarioActual().Nombre));
+                await apiService.UpdatePlaza(Pza);
+
                 IsRunning = false;
                 navigationService.SetMainPage(navigationService.GetUsuarioActual());
                 return;

@@ -493,11 +493,11 @@ namespace AppParqueoAzul.Services
             }
         }
 
-        public async Task<Plaza> UpdatePlaza(Plaza Nombre)
+        public async Task<Plaza> UpdatePlaza(Plaza _plaza)
         {
             try
             {
-                var request = JsonConvert.SerializeObject(Nombre);
+                var request = JsonConvert.SerializeObject(_plaza);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
                 client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
@@ -511,6 +511,58 @@ namespace AppParqueoAzul.Services
                 var plaza = JsonConvert.DeserializeObject<Plaza>(result);
 
                 return plaza;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Barrios>> GetBarrios()
+        {
+            try
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
+                var url = "/api/Plazas/GetBarrios";
+                var response = await client.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var barrios = JsonConvert.DeserializeObject<List<Barrios>>(result);
+
+                return barrios;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Plaza>> GetPlazaByBarrio(Barrios _barrio)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(_barrio);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
+                var url = "/api/Plazas/GetPlazaByBarrio";
+                var response = await client.PostAsync(url, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                var plazas = JsonConvert.DeserializeObject<List<Plaza>>(result);  
+
+                return plazas;
 
             }
             catch (Exception)

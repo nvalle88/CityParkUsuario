@@ -42,6 +42,13 @@
                     <TapGestureRecognizer Command="{Binding PrepagoCommand} "></TapGestureRecognizer>
                 </Image.GestureRecognizers>
             </Image>
+            <Image Grid.Column="1" Grid.Row="4" Source="plazas.png"
+           HorizontalOptions="Center"
+           VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding VerificaPlazasCommand} "></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
             
         </StackLayout>
     </Grid>

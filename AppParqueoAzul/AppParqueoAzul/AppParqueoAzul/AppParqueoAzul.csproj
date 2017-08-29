@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\INetworkConnection.cs" />
     <Compile Include="Models\Agente.cs" />
+    <Compile Include="Models\Barrios.cs" />
     <Compile Include="Models\Carro.cs" />
     <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\Marca.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Models\Multa.cs" />
     <Compile Include="Models\Parqueo.cs" />
     <Compile Include="Models\Plaza.cs" />
+    <Compile Include="Models\PlazaView.cs" />
     <Compile Include="Models\Saldo.cs" />
     <Compile Include="Models\TarjetaCredito.cs" />
     <Compile Include="Models\TarjetaPrepago.cs" />
@@ -97,6 +99,9 @@
     <Compile Include="Pages\ParquearPage.xaml.cs">
       <DependentUpon>ParquearPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PlazaPage.xaml.cs">
+      <DependentUpon>PlazaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PromocionesPage.xaml.cs">
       <DependentUpon>PromocionesPage.xaml</DependentUpon>
     </Compile>
@@ -122,6 +127,7 @@
     <Compile Include="ViewModels\NuevaTarjetaCreditoViewModel.cs" />
     <Compile Include="ViewModels\NuevoCarroViewModel.cs" />
     <Compile Include="ViewModels\NuevoParqueoViewModel.cs" />
+    <Compile Include="ViewModels\PlazaViewModel.cs" />
     <Compile Include="ViewModels\PrepagoViewModel.cs" />
     <Compile Include="ViewModels\TarjetaCreditoViewModel.cs" />
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
@@ -276,6 +282,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\ComprarSaldoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\PlazaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
