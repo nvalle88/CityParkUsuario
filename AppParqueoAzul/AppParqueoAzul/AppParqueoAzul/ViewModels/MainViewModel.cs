@@ -10,6 +10,9 @@ using System.Windows.Input;
 using Xamarin.Forms.Maps;
 using System.ComponentModel;
 using AppParqueoAzul.Models;
+using Xamarin.Forms;
+using System.Diagnostics;
+using AppParqueoAzul.Classes;
 
 namespace AppParqueoAzul.ViewModels
 {
@@ -48,10 +51,6 @@ namespace AppParqueoAzul.ViewModels
 
         #endregion
 
-
-
-
-
         #region Propeties
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
 
@@ -65,6 +64,8 @@ namespace AppParqueoAzul.ViewModels
 
         public UsuarioViewModel UsuarioRegister { get; set; }
 
+        public Double tiempoRestante { get; set; }
+        public Double tiempoComprado { get; set; }
 
         public ObservableCollection<TarjetaCreditoViewModel> TarjetasCreditos { get; set; }
 
@@ -76,7 +77,6 @@ namespace AppParqueoAzul.ViewModels
         public NuevaTarjetaCreditoViewModel NuevaTarjetaCredito { get; set; }
         public NuevoParqueoViewModel NuevoParqueo { get; set; }
         public PlazaViewModel PlazaVM { get; set; }
-
 
         public bool IsRefreshing
         {
@@ -95,13 +95,13 @@ namespace AppParqueoAzul.ViewModels
             }
         }
 
-
         #endregion
 
         #region Attributes
         private bool isRefreshing = false;
         private NavigationService navigationService;
         private DataService dataService;
+   
 
         #endregion
 
@@ -113,7 +113,7 @@ namespace AppParqueoAzul.ViewModels
 
         #region Services
 
-        private ApiService apiService;
+        public ApiService apiService;
 
         #endregion
 
@@ -127,7 +127,6 @@ namespace AppParqueoAzul.ViewModels
             apiService = new ApiService();
             BuscarSaldo = new BuscarTarjetaPrepagoViewModel();
             PlazaVM = new PlazaViewModel();
-
             //NuevoCarro = new NuevoCarroViewModel(0);
             //// var lista= apiService.Get<TarjetaViewModel>("TarjetaCreditoes");
             //NuevaTarjetaCredito = new NuevaTarjetaCreditoViewModel();
@@ -137,19 +136,15 @@ namespace AppParqueoAzul.ViewModels
             dataService = new DataService();
             navigationService = new NavigationService();
             NewLogin = new LoginViewModel();
-           
             SaldoDisponibre = new SaldoViewModel
             {
                 Saldo1 = 123,
             };
-
-
-
-           // LoadSaldo();
-            //LoadCarros();
-            // LoadTarjetas();
-           //LoadMenu();
+            
         }
+
+       
+
 
         private void LoadSaldo()
         {
@@ -391,11 +386,35 @@ namespace AppParqueoAzul.ViewModels
                 SubTitle = string.Format("Tarjetas registradas"),
             });
 
+        }
 
+        public async void LoadTiempo()
+        {
+            var tiempo = await apiService.ConsultarTiempo(new UsuarioRequest { UsuarioId = App.UsuarioActual.UsuarioId.ToString(), });
 
+            if (tiempo.Restante > new TimeSpan(0))
+            {
+                Debug.WriteLine("si tiene tiempo disponible, {0}",tiempo.Restante);
+                //  Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(.02), OnTimer);
 
+                tiempoRestante = (tiempo.Restante.Hours + tiempo.Restante.Minutes / 100.0 + tiempo.Restante.Seconds / 10000.0) * (tiempo.Restante > TimeSpan.Zero ? 1 : -1);
+                tiempoComprado = (tiempo.Comprado.Hours + tiempo.Comprado.Minutes / 100.0 + tiempo.Comprado.Seconds / 10000.0) * (tiempo.Comprado > TimeSpan.Zero ? 1 : -1);
+
+                // tiempoRestante = Convert.ToDouble(tiempo.Restante);
+                //   tiempoComprado = Convert.ToDouble(tiempo.Comprado);
+
+            }
+            else
+            {
+                Debug.WriteLine("no tiene tiempo disponible, {0}", tiempo.Restante);
+            }
 
         }
+        
+
+    
         #endregion
+
+
     }
 }

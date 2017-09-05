@@ -5,10 +5,12 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Menú"
              BackgroundColor="{StaticResource BackgroundColor}"
+             Padding="0,40,0,0"
+             Icon="icon.png"
              >
 
-    <StackLayout>
-        <StackLayout Orientation="Horizontal">
+    <StackLayout  Padding="10" Spacing="20" >
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
             <Image
                Source="ic_City_Park.png"
                 WidthRequest="80"

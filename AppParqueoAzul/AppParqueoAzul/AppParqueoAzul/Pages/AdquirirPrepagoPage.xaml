@@ -26,7 +26,7 @@
                 Command="{Binding ComprarSaldoCommand}"
                 Text="Adquirir"
                 BackgroundColor="{StaticResource AccentColor2}"
-                TextColor="{StaticResource FontColor}">
+                TextColor="{StaticResource MainColor}">
             </Button>
         </StackLayout>
     </ContentPage.Content>

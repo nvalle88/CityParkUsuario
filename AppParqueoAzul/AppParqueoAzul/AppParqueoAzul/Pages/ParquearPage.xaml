@@ -127,7 +127,7 @@
                 Command="{Binding SalvarParqueoCommand}"
                 Text="Guardar"
                 BackgroundColor="{StaticResource AccentColor2}"
-                TextColor="{StaticResource FontColor}">
+                TextColor="{StaticResource MainColor}">
             </Button>
             
             <ActivityIndicator  AnchorX="10" AnchorY="10"  HorizontalOptions="Center" 

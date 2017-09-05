@@ -111,8 +111,11 @@ namespace AppParqueoAzul.ViewModels
 
                 var main = MainViewModel.GetInstance();
                 main.LoadMenu();
+                
 
                 navigationService.SetMainPage(usuarioView);
+              //  main.LoadTiempo();
+
                 IsRunning = false;
                 return;
             }

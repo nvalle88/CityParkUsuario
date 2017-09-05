@@ -23,7 +23,7 @@
             <Button
                 Text="Escanear Código"
                 BackgroundColor="{StaticResource AccentColor2}"
-                TextColor="{StaticResource FontColor}"
+                TextColor="{StaticResource MainColor}"
                 Clicked="Button_Clicked">
                 
             </Button>
@@ -32,7 +32,7 @@
                 Command="{Binding BuscarSaldoCommand}"
                 Text="Ingresar"
                 BackgroundColor="{StaticResource AccentColor2}"
-                TextColor="{StaticResource FontColor}">
+                TextColor="{StaticResource MainColor}">
             </Button>
             <ActivityIndicator  HorizontalOptions="Center" 
                             Color="{StaticResource AccentColor2}" 

@@ -149,8 +149,8 @@ namespace AppParqueoAzul.ViewModels
             var parqueo = new Parqueo
             {
 
-                FechaInicio = DateTime.Now,
-                FechaFin = DateTime.Now.AddMinutes(cantidadMinutos),
+                FechaInicio = DateTime.Now.ToLocalTime(),
+                FechaFin = DateTime.Now.AddMinutes(cantidadMinutos).ToLocalTime(),
                 Latitud = PP.Location.Latitude,
                 CarroId = CarroId,
                 Longitud = PP.Location.Longitude,

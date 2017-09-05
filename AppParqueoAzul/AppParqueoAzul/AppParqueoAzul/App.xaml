@@ -13,7 +13,7 @@
             <Color x:Key="MainColor">#FFFFFF</Color>
             <Color x:Key="FontColor">#000000</Color>
             <Color x:Key="AccentColor1">#9E9E9E</Color>
-            <Color x:Key="AccentColor2">#299CBE</Color>
+            <Color x:Key="AccentColor2">#1976D2</Color>
             <Color x:Key="BackgroundColor">#F7F7F7</Color>
             <!-- Menu colors -->
             <Color x:Key="MenuColor">#E0E0E0</Color>

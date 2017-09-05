@@ -38,7 +38,7 @@
                 Command="{Binding SalvarTarjetaCommand}"
                 Text="Salvar"
                 BackgroundColor="{StaticResource AccentColor2}"
-                TextColor="{StaticResource FontColor}">
+                TextColor="{StaticResource MainColor}">
                 </Button>
                 <ActivityIndicator  HorizontalOptions="Center" 
                             Color="{StaticResource AccentColor2}" 

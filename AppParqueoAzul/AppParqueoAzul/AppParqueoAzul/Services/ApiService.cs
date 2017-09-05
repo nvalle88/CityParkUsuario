@@ -47,6 +47,7 @@ namespace AppParqueoAzul.Services
                     IsSuccess = true,
                     Message = "Login Ok",
                     Result = user,
+                    
                 };
 
 
@@ -61,7 +62,36 @@ namespace AppParqueoAzul.Services
                 };
                 throw;
             }
+
         }
+
+
+        public async Task<TiempoRequest> ConsultarTiempo(UsuarioRequest usuario)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(usuario);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
+                var url = "/api/Parqueos/GetTiempo";
+                var response = await client.PostAsync(url, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                var tiempos = JsonConvert.DeserializeObject<TiempoRequest>(result);
+                return tiempos;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
 
         public async Task<Response> ConsultarSaldo(int usuarioId)
         {

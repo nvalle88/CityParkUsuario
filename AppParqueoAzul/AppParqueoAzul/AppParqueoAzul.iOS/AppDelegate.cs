@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using ProgressRingControl.Forms.Plugin.iOS;
 
 namespace AppParqueoAzul.iOS
 {
@@ -22,9 +23,10 @@ namespace AppParqueoAzul.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            ButtonCircle.FormsPlugin.iOS.ButtonCircleRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            ProgressRingRenderer.Init();
             return base.FinishedLaunching(app, options);
         }
     }
