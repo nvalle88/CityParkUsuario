@@ -5,27 +5,26 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              xmlns:local="clr-namespace:AppParqueoAzul.Controls;assembly=AppParqueoAzul"
              xmlns:progressring="clr-namespace:ProgressRingControl.Forms.Plugin;assembly=ProgressRing.Forms.Plugin"
-             Title="Main Page"
+             Title="CityPark"
+             
              BindingContext="{Binding Main, Source={StaticResource Locator}}"            
              BackgroundColor="{StaticResource MainColor}"           
              Icon="icon.png"
+             
              >
     <Grid HorizontalOptions="Center" VerticalOptions="StartAndExpand">
      <StackLayout VerticalOptions="StartAndExpand">
-        <!--<Image
+        <Image x:Name="ImagenCity"
                Source="ic_City_Park.png"
                 WidthRequest="180"
                 HeightRequest="100"
                 HorizontalOptions="Center"
-                VerticalOptions="Center" >
-        </Image>-->
-            <Grid VerticalOptions="Start" HorizontalOptions="Center" HeightRequest="150" WidthRequest="150">
-              
-                <Label x:Name="LabelRestante" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Center" Text="30min"/>
+                VerticalOptions="Center"
+                IsVisible="False">
+        </Image>
+            <Grid VerticalOptions="Start" HorizontalOptions="Center" HeightRequest="150" WidthRequest="150" IsVisible="False" x:Name="ProgressBarTime">
 
-
-                <!--<local:CircularProgressControl x:Name="progressControl" Progress="0" HorizontalOptions="Center" VerticalOptions="Center"  WidthRequest="150" HeightRequest="150"/>-->
-
+                <Label x:Name="LabelRestante" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Center" Text="0 min"/>
                 <progressring:ProgressRing 
                     x:Name="ProgressTime"
                     RingThickness="17" 

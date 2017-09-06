@@ -104,6 +104,11 @@
                 </ViewCell>
             </DataTemplate>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource AccentColor2}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
