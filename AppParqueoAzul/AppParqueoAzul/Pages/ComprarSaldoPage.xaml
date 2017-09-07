@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.ComprarSaldoPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Adquirir Saldo..."
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding BuscarSaldo}" Padding="10" Spacing="20">
+            <BoxView
+            Color="{StaticResource AccentColor2}"
+            HeightRequest="2">
+            </BoxView>
+            
+            <Entry 
+                Placeholder="Ingrese el código de tarjeta prepago"
+                x:Name="codeEntry"  
+                Text="{Binding Codigo,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"
+                   ></Entry>
+            
+            <Button
+                Text="Escanear Código"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}"
+                Clicked="Button_Clicked">
+                
+            </Button>
+            
+            <Button 
+                Command="{Binding BuscarSaldoCommand}"
+                Text="Ingresar"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}">
+            </Button>
+            <ActivityIndicator  HorizontalOptions="Center" 
+                            Color="{StaticResource AccentColor2}" 
+                            IsRunning="{Binding IsRunning}" >
+            </ActivityIndicator>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

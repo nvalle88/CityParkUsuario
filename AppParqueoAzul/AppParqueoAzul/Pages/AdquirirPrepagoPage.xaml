@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.AdquirirPrepagoPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Adquirir Saldo"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding Saldo}" Padding="10" Spacing="20">
+            <StackLayout  Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="{Binding SaldoDisponible,StringFormat='Saldo: {0}'}"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                   TextColor="{StaticResource FontColor}"
+                   VerticalOptions="EndAndExpand">
+                </Label>
+            </StackLayout>
+            <Entry Placeholder="Adquirir Saldo"
+                   Keyboard="Numeric"
+                   Text="{Binding SaldoComprar,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"
+                   >
+            </Entry>
+            
+            <Button 
+                Command="{Binding ComprarSaldoCommand}"
+                Text="Adquirir"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

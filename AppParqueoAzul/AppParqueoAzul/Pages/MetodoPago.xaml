@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.MetodoPago"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Tarjeta"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="20" Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label            
+                TextColor="{StaticResource AccentColor2}" 
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+             ></Label>
+                <BoxView
+            Color="{StaticResource AccentColor2}"
+            HeightRequest="2">
+                </BoxView>
+            </StackLayout>
+
+            <Button 
+                Command="{Binding NevoTarjetaCommand}"
+                Text="Ingresar"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+            </Button>
+
+            <Button 
+                Command="{Binding NevoPrepagoCommand}"
+                Text="Ingresar"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}">
+            </Button>
+            
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

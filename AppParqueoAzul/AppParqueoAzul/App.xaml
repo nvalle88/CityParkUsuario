@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:infra="clr-namespace:AppParqueoAzul.Infrastructure;assembly=AppParqueoAzul" 
+             x:Class="AppParqueoAzul.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <!-- Locator -->
+            <infra:InstanceLocator x:Key="Locator">
+            </infra:InstanceLocator>
+            <!--  colorer -->
+            <Color x:Key="MainColor">#FFFFFF</Color>
+            <Color x:Key="FontColor">#000000</Color>
+            <Color x:Key="AccentColor1">#9E9E9E</Color>
+            <Color x:Key="AccentColor2">#1976D2</Color>
+            <Color x:Key="BackgroundColor">#F7F7F7</Color>
+            <!-- Menu colors -->
+            <Color x:Key="MenuColor">#E0E0E0</Color>
+            <Color x:Key="MenuFontColor">#313131</Color>
+            <!--Data Templates-->
+            <DataTemplate x:Key="CarrosItemTemplate">
+                <ViewCell>
+                    <Grid>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout  Orientation="Vertical">
+                            <Label 
+                              FontAttributes="Bold"
+                              VerticalOptions="Center"
+                              TextColor="{StaticResource FontColor}"
+                              Text="{Binding Placa,StringFormat='Placa:{0}'}"/>
+                           
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Orientation="Vertical">
+                            <StackLayout Orientation="Vertical">
+                                <Label 
+                                      VerticalOptions="Center"
+                                      TextColor="{StaticResource AccentColor1}"
+                                      Text="{Binding NombreMarca,StringFormat='Marca:{0}'}}"/>
+                                <Label 
+                                      VerticalOptions="Center"
+                                      TextColor="{StaticResource AccentColor1}"
+                                      Text="{Binding NombreModelo,StringFormat='Modelo:{0}'}}"/>
+                                <Label 
+                                      VerticalOptions="Center"
+                                      TextColor="{StaticResource AccentColor1}"
+                                      Text="{Binding Color,StringFormat='Color:{0}'}}"/>
+                            </StackLayout>
+                        </StackLayout>
+                       
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TarjetasItemTemplate">
+                <ViewCell>
+                    <Grid>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                      
+                            <StackLayout Orientation="Vertical">
+                            <Label 
+                              FontAttributes="Bold"
+                              VerticalOptions="Center"
+                              TextColor="{StaticResource FontColor}"
+                              Text="{Binding Nombre,StringFormat='Nombre:{0}'}"/>
+                            <Label 
+                              FontAttributes="Bold"
+                              VerticalOptions="Center"
+                              TextColor="{StaticResource FontColor}"
+                              Text="{Binding Apellidos,StringFormat='Apellidos:{0}'}"/>
+                            </StackLayout>
+                        
+                            <StackLayout Grid.Column="1" Orientation="Vertical">
+                                <StackLayout Orientation="Vertical">
+                                <Label 
+                                      VerticalOptions="Center"
+                                      FontAttributes="Bold"
+                                      TextColor="{StaticResource AccentColor1}"
+                                      Text="{Binding Numero,StringFormat='Numero:{0}'}"/>
+                                <Label 
+                                      VerticalOptions="Center"
+                                      TextColor="{StaticResource AccentColor1}"
+                                      Text="{Binding Caducidad,StringFormat='Caducidad:{0:MM/yyyy}'}"/>
+                                <Label 
+                                      VerticalOptions="Center"
+                                      TextColor="{StaticResource AccentColor1}"
+                                      Text="{Binding CVV_CVC, StringFormat='CVV/CVC{0}'}}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+         
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

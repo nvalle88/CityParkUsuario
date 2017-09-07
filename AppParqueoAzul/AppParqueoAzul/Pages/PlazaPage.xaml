@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:AppParqueoAzul.Controls"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="AppParqueoAzul.Pages.PlazaPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="3" BindingContext="{Binding PlazaVM}">
+
+            <control:BindablePicker
+                  Title="Seleccione el Barrio"
+                  DisplayMemberPath="NombreBarrio"
+                  SelectedValuePath="NombreBarrio"
+                  ItemsSource="{Binding Barrios}"
+                  HorizontalOptions="FillAndExpand"
+                  SelectedItem="{Binding BarrioSelectedItem, Mode=TwoWay}"
+                  VerticalOptions="Center"/>
+
+            <ListView  x:Name="lstView" RowHeight="60" ItemsSource="{Binding Plazas}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text = "{Binding Nombre}" FontSize="24" AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40"/>
+                                    <Label Text = "{Binding Direccion}" AbsoluteLayout.LayoutBounds="50, 35, 200, 25"/>
+                                </StackLayout>
+
+                                <Image Source="{Binding Imagen}" HorizontalOptions="End" AbsoluteLayout.LayoutBounds="250.25, 0.25, 50, 50 "/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

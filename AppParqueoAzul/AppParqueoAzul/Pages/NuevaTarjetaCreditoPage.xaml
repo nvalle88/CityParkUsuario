@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.NuevaTarjetaCreditoPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Añadir tarjeta"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <ScrollView >
+            <StackLayout BindingContext="{Binding NuevaTarjetaCredito}" Padding="1">
+               
+                <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Nombre"
+                   HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                   Text="{Binding Nombre,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"
+                   ></Entry>
+                <Entry Placeholder="Apellidos"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                   Text="{Binding Apellido,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"></Entry>
+                </StackLayout>
+                <Entry Placeholder="Numero de la tarjeta"
+                   Text="{Binding Numero,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"></Entry>
+                <DatePicker TextColor="{StaticResource FontColor}" Date="{Binding Caducidad,Mode=TwoWay}}">
+                    <DatePicker.Format>MM-yyyy</DatePicker.Format>
+                </DatePicker>
+                
+
+                <Entry Placeholder="CVV/CVC"
+                   Text="{Binding CVV_CVC,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"></Entry>
+                <Button 
+                Command="{Binding SalvarTarjetaCommand}"
+                Text="Salvar"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}">
+                </Button>
+                <ActivityIndicator  HorizontalOptions="Center" 
+                            Color="{StaticResource AccentColor2}" 
+                            IsRunning="{Binding IsRunning}" >
+                </ActivityIndicator>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

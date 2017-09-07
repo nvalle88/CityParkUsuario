@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.NuevoCarroPage"
+             xmlns:control="clr-namespace:AppParqueoAzul.Controls"
+             xmlns:local="clr-namespace:AppParqueoAzul.Behaviors;assembly=AppParqueoAzul"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Nuevo vehículo"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <ScrollView >
+            <StackLayout BindingContext="{Binding NuevoCarro}" Padding="2" Spacing="5">
+
+                <control:BindablePicker
+                  Title="Seleccione la Marca"
+                   DisplayMemberPath="Nombre"
+                  SelectedValuePath="MarcaId"
+                  ItemsSource="{Binding Marcas}"
+                  SelectedValue ="{Binding Path=MarcaId, Mode=TwoWay}"
+                    SelectedItem="{Binding MarcaSelectedItem, Mode=TwoWay}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Center"
+                    />
+                
+                <control:BindablePicker
+                  Title="Seleccione el Modelo"
+                  DisplayMemberPath="Nombre"
+                  SelectedValuePath="ModeloId"
+                  ItemsSource="{Binding Modelos}"
+                  SelectedValue ="{Binding Path=ModeloId, Mode=TwoWay}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Center"
+                  />
+                
+                <Entry Placeholder="Placa"
+                   Text="{Binding Placa,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}">
+                    <Entry.Behaviors>
+                        <local:PlacaValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+            <Entry Placeholder="Color"
+                   Text="{Binding Color,Mode=TwoWay}"
+                   TextColor="{StaticResource FontColor}"></Entry>
+                <Button 
+                Command="{Binding SalvarCarroCommand}"
+                Text="Salvar"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}">
+                </Button>
+                <ActivityIndicator  HorizontalOptions="Center" 
+                            Color="{StaticResource AccentColor2}" 
+                            IsRunning="{Binding IsRunning}" >
+                </ActivityIndicator>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppParqueoAzul.Pages.ParquearPage"
+             xmlns:control="clr-namespace:AppParqueoAzul.Controls"
+             xmlns:circularButton="clr-namespace:ButtonCircle.FormsPlugin.Abstractions;assembly=ButtonCircle.FormsPlugin.Abstractions"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Nuevo parqueo"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ScrollView>
+        <StackLayout Spacing="3" Padding="3" BindingContext="{Binding NuevoParqueo}">
+            <maps:Map 
+            WidthRequest="100" 
+            HeightRequest="100"
+            x:Name="MyMap"
+            IsShowingUser="true">
+                
+            </maps:Map>
+            <Entry Placeholder="Plaza"
+                   Text="{Binding PlazaName}"
+                   TextColor="{StaticResource FontColor}"
+                   >
+                
+
+            </Entry>
+
+            <control:BindablePicker
+                  Title="Seleccione el vehículo"
+                  DisplayMemberPath="FullName"
+                  SelectedValuePath="CarroId"
+                  ItemsSource="{Binding Carros}"
+                  SelectedValue ="{Binding Path=CarroId, Mode=TwoWay}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Center"/>
+
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <!--     <Entry
+              IsEnabled="False"
+              Text="{Binding CantidadHoras}"
+              FontAttributes="Bold"
+              TextColor="{StaticResource AccentColor2}"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="Center"/>
+                  <Stepper
+              Value="{Binding CantidadHoras}"
+              Increment="1"
+              Minimum="1"
+              Maximum="3"
+              HorizontalOptions="End"
+              VerticalOptions="Center"
+              ValueChanged="OnCantHorasChanged"/>-->
+
+                <circularButton:CircleButton 
+                    x:Name="Button30m"
+                    Text="30m"
+                    FontSize="15" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="1"
+                    Clicked="CircleButton_Clicked"
+
+                  
+                    />
+                <circularButton:CircleButton 
+                    x:Name="Button1h"
+                    Text="1h"
+                    FontSize="15" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="2"
+                    Clicked="CircleButton_Clicked"
+
+                    />
+                    <circularButton:CircleButton 
+                    x:Name="Button1h30m"
+                    Text="1h:30m"
+                    FontSize="15" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="3"
+                    Clicked="CircleButton_Clicked"
+
+/>
+                <circularButton:CircleButton 
+                    x:Name="Button2h"
+                    Text="2h"
+                    FontSize="15" 
+                    TextColor="Black" 
+                    HeightRequest="70" 
+                    BorderRadius="70" 
+                    WidthRequest="70" 
+                    BorderColor="Black" 
+                    BorderThickness="5" 
+                    BackgroundColor="White" 
+                    Command="{Binding UpdateminutosCommand}"
+                    CommandParameter="4"
+                    Clicked="CircleButton_Clicked"
+
+                    />
+                
+
+            </StackLayout>
+           
+
+           
+            <Button 
+                Command="{Binding SalvarParqueoCommand}"
+                Text="Guardar"
+                BackgroundColor="{StaticResource AccentColor2}"
+                TextColor="{StaticResource MainColor}">
+            </Button>
+            
+            <ActivityIndicator  AnchorX="10" AnchorY="10"  HorizontalOptions="Center" 
+                            Color="{StaticResource AccentColor2}" 
+                            IsRunning="{Binding IsRunning}" >
+            </ActivityIndicator>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
