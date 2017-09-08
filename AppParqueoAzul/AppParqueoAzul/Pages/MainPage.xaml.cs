@@ -15,18 +15,14 @@ namespace AppParqueoAzul.Pages
     public partial class MainPage : ContentPage
     {
         ApiService apiService = new ApiService();
-
-        Double tr = 0;
-        
+        Double tr = 0;        
         Double tiempoLabel = 0;
         bool TieneTiempo = false;
         public MainPage()
         {
-            InitializeComponent();
-            //ImagenCity.IsVisible = true;
+            InitializeComponent();           
             LoadTime();
-            Device.StartTimer(TimeSpan.FromMinutes(2),OnTimer);
-            
+            Device.StartTimer(TimeSpan.FromMinutes(2),OnTimer);            
         }
 
         private async void  LoadTime()
