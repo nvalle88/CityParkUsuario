@@ -44,6 +44,7 @@
     <Compile Include="Classes\LoginRequest.cs" />
     <Compile Include="Classes\MarcaRequest.cs" />
     <Compile Include="Classes\ModeloRequest.cs" />
+    <Compile Include="Classes\Posicion.cs" />
     <Compile Include="Classes\Response.cs" />
     <Compile Include="Classes\ResponseLogin.cs" />
     <Compile Include="Classes\TiempoRequest.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using AppParqueoAzul.Pages;
 using AppParqueoAzul.ViewModels;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace AppParqueoAzul
 {
@@ -18,22 +19,13 @@ namespace AppParqueoAzul
         {
             InitializeComponent();
             MainPage = new LoginPage();
+         
+
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
-            //CrossFirebasePushNotification.Current.Subscribe("general");
-       
-            //CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
-
-            //{
-
-            //    System.Diagnostics.Debug.WriteLine($"TOKEN REC: {p.Token}");
-
-            //};
-
-            //System.Diagnostics.Debug.WriteLine($"TOKEN: {CrossFirebasePushNotification.Current.Token}");
+           
         }
 
         protected override void OnSleep()

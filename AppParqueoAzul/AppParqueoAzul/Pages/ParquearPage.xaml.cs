@@ -11,6 +11,7 @@ using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using ButtonCircle.FormsPlugin.Abstractions;
 using AppParqueoAzul.Services;
+using AppParqueoAzul.Models;
 
 namespace AppParqueoAzul.Pages
 {
@@ -18,7 +19,7 @@ namespace AppParqueoAzul.Pages
     public partial class ParquearPage : ContentPage
     {
         private NuevoParqueoViewModel parqueo;
-
+        public List<Plaza> Listplazas;
         #region Singleton
 
         static ParquearPage instance;
@@ -40,11 +41,8 @@ namespace AppParqueoAzul.Pages
             InitializeComponent();
             parqueo = new NuevoParqueoViewModel();
             instance = this;
-            Location = new Plugin.Geolocator.Abstractions.Position();
-
+            Location = new Plugin.Geolocator.Abstractions.Position();         
             Locator();
-
-
         }
 
         //private void OnCantHorasChanged(object sender, ValueChangedEventArgs e)
@@ -58,9 +56,8 @@ namespace AppParqueoAzul.Pages
         {
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
-
             var location = await locator.GetPositionAsync();
-            var position = new Position(location.Latitude, location.Longitude);
+            var position = new Position(location.Latitude, location.Longitude);           
             MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(.3)));
             Location = location;
         }

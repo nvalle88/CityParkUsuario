@@ -105,8 +105,6 @@ namespace AppParqueoAzul.Services
         }
 
 
-
-
         public async Task<Response> ConsultarSaldo(int usuarioId)
         {
             try
@@ -399,9 +397,6 @@ namespace AppParqueoAzul.Services
                     Message = "Tarjeta de Crédito creada Ok",
                     Result = newTarjetaCredito,
                 };
-
-
-
             }
             catch (Exception ex)
             {
@@ -410,7 +405,6 @@ namespace AppParqueoAzul.Services
                     IsSuccess = false,
                     Message = ex.Message
                 };
-
             }
         }
 
@@ -418,8 +412,6 @@ namespace AppParqueoAzul.Services
         {
             try
             {
-
-
                 var request = JsonConvert.SerializeObject(Parqueo);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient();
@@ -563,6 +555,60 @@ namespace AppParqueoAzul.Services
             }
         }
 
+        public async Task<List<Plaza>> GetPlazaByBarrio(Barrios _barrio)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(_barrio);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
+                var url = "/api/Plazas/GetPlazaByBarrio";
+                var response = await client.PostAsync(url, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                var plazas = JsonConvert.DeserializeObject<List<Plaza>>(result);
+
+                return plazas;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task <List<Plaza>> GetPlazaByPosition(Classes.Posicion MyPosition)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(MyPosition);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
+                var url = "/api/Plazas/GetPlazaByPosition";
+                var response = await client.PostAsync(url, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                var plazas = JsonConvert.DeserializeObject<List<Plaza>>(result);
+
+                return plazas;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+
+        }
+
         public async Task<List<Barrios>> GetBarrios()
         {
             try
@@ -589,31 +635,7 @@ namespace AppParqueoAzul.Services
             }
         }
 
-        public async Task<List<Plaza>> GetPlazaByBarrio(Barrios _barrio)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(_barrio);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("http://cityparkws.azurewebsites.net");
-                var url = "/api/Plazas/GetPlazaByBarrio";
-                var response = await client.PostAsync(url, content);
-                if (!response.IsSuccessStatusCode)
-                {
-                    return null;
-                }
-                var result = await response.Content.ReadAsStringAsync();
-                var plazas = JsonConvert.DeserializeObject<List<Plaza>>(result);  
-
-                return plazas;
-
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
+       
 
 
         //public static byte[] ReadFully(Stream input)

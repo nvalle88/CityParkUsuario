@@ -15,14 +15,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
+
 namespace AppParqueoAzul.ViewModels
 {
    public class NuevoParqueoViewModel: Parqueo//,INotifyPropertyChanged
     {
         Position Location;
         int cantidadMinutos;
-        public string PlazaName { get; set; }
-
 
         private ApiService apiService;
         private NavigationService navigationService;
@@ -30,7 +29,10 @@ namespace AppParqueoAzul.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         public ObservableCollection<CarrosViewModel> Carros { get; set; }
+        public ObservableCollection<Plaza> Plazas { get; set; }
+
 
         public bool isRunning;
 
@@ -52,6 +54,8 @@ namespace AppParqueoAzul.ViewModels
         {
             IsRunning = true;
             Carros = new ObservableCollection<CarrosViewModel>();
+            Plazas = new ObservableCollection<Plaza>();
+
             apiService = new ApiService();
             navigationService = new NavigationService();
             dialogService = new DialogService();
@@ -59,10 +63,13 @@ namespace AppParqueoAzul.ViewModels
             Location.Latitude = -1;
             Location.Longitude = -1;
 
+            ObtenerPlazas();
             LoadCarros();
             IsRunning = false;
 
         }
+
+
 
 
         //public void UpdateCantidadMinutos(object sender, int value)
@@ -75,10 +82,47 @@ namespace AppParqueoAzul.ViewModels
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
              Location = await locator.GetPositionAsync();
-            
-           
-           
+
         }
+
+        private async void ObtenerPlazas()
+        {
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 50;
+            var location = await locator.GetPositionAsync();
+
+            Classes.Posicion posicion = new Classes.Posicion
+            { latitude= location.Latitude,
+                longitude =location.Longitude,
+            };
+            var _Plazas = await apiService.GetPlazaByPosition(posicion);
+
+            Plazas.Clear();
+
+            foreach (var plaza in _Plazas)
+            {
+                Plazas.Add(plaza);
+            }
+
+
+        }
+
+        Plaza PlazaSeleccionada;
+        public Plaza PlazaSelectedItem
+        {
+            get
+            {
+                return PlazaSeleccionada;
+            }
+            set
+            {
+                // marcaseleccionada = ;
+                PlazaSeleccionada = value;
+            }
+        }
+
+
+
 
         private async void LoadCarros()
         {
@@ -130,17 +174,14 @@ namespace AppParqueoAzul.ViewModels
         }
 
         public async void SalvarParqueo()
-        {
-
-            
+        {            
             IsRunning = true;
-            Debug.WriteLine(PlazaName);
-            Plaza plaza = new Plaza
-            {
-                Nombre = PlazaName,
-            };
-
-            var Pza = await apiService.GetPlazaByNombre(plaza);
+            //Debug.WriteLine(PlazaName);
+            //Plaza plaza = new Plaza
+            //{
+            //    Nombre = PlazaName,
+            //};
+            //var Pza = await apiService.GetPlazaByNombre(plaza);
             
             var PP = ParquearPage.GetInstance();
 
@@ -155,27 +196,27 @@ namespace AppParqueoAzul.ViewModels
                 CarroId = CarroId,
                 Longitud = PP.Location.Longitude,
                 UsuarioId = navigationService.GetUsuarioActual().UsuarioId,
-                PlazaId = Pza.PlazaId,
+                PlazaId = PlazaSeleccionada.PlazaId,
             };
-            Pza.Ocupado = true;
+            PlazaSeleccionada.Ocupado = true;
 
             var response =await apiService.NuevaParqueo(parqueo);
             
             if (response.IsSuccess)
             {
                 var newParqueo = (Parqueo)response.Result;
-                await dialogService.ShowMessage(" El parqueo ha sido establesido satisfactoriamente."
+                await dialogService.ShowMessage(" El parqueo ha sido establecido satisfactoriamente."
                                                                 , string.Format("Vehículo: {0}, con placa: {1}, Hora de Inicio: {2} Hora Final: {3} LATITUD{4}, LONGITUD{5}, Usuario {6}"
                                                                                 , newParqueo.Carro.Modelo.Marca.Nombre, newParqueo.Carro.Placa, 
                                                                                 newParqueo.FechaInicio.ToString(), newParqueo.FechaFin.ToString(), 
                                                                                 newParqueo.Latitud, newParqueo.Longitud, navigationService.GetUsuarioActual().Nombre));
-                await apiService.UpdatePlaza(Pza);
+                await apiService.UpdatePlaza(PlazaSeleccionada);
 
                 IsRunning = false;
                 navigationService.SetMainPage(navigationService.GetUsuarioActual());
                 return;
             }
-            await dialogService.ShowMessage("El parqueo no ha sido establesido satisfactoriamente", response.Message);
+            await dialogService.ShowMessage("El parqueo no ha sido establecido satisfactoriamente", response.Message);
             IsRunning = false;
             return;     
         }

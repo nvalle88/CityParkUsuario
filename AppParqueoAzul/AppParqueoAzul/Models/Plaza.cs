@@ -13,5 +13,7 @@ namespace AppParqueoAzul.Models
         public string Barrio { get; set; }
         public string Direccion { get; set; }
         public Nullable<bool> Ocupado { get; set; }
+        public Nullable<double> Longitud { get; set; }
+        public Nullable<double> Latitud { get; set; }
     }
 }
